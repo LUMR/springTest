@@ -5,8 +5,14 @@
 
     <bean id="userDao" class="dao.impl.UserDao"/>
     <bean id="userBiz" class="dao.impl.UserBiz">
+        <!--设置注入-->
         <property name="dao">
             <ref bean="userDao"/>
         </property>
+        <!--构造注入
+        <constructor-arg>
+            <ref bean="userDao"/>
+        </constructor-arg>
+        -->
     </bean>
 </beans>
