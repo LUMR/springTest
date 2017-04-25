@@ -7,7 +7,7 @@ import entity.User;
 /**
  * Created by lumr on 2017/4/24.
  */
-public class UserBiz implements IUserBiz {
+public class UserBizImpl implements IUserBiz {
     private IDao dao;
 
     public void setDao(IDao dao) {

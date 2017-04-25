@@ -6,9 +6,9 @@ import entity.User;
 /**
  * Created by lumr on 2017/4/24.
  */
-public class UserDao implements IDao {
+public class UserDaoImpl implements IDao {
     @Override
     public void save(User user) {
-        System.out.println("保存用户信息到数据库。");
+        System.out.println("保存用户"+user.getName()+"信息到数据库。");
     }
 }

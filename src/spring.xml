@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/aop
+                           http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-    <bean id="userDao" class="dao.impl.UserDao"/>
-    <bean id="userBiz" class="dao.impl.UserBiz">
+    <bean id="serviceLogging" class="aop.ServiceLogging">
+
+    </bean>
+    <aop:config>
+        <aop:pointcut expression="execution(public void saveUser(entity.User))" id="servicePointCut"/>
+        <aop:aspect ref="serviceLogging">
+            <aop:before method="beforeService" pointcut-ref="servicePointCut"/>
+        </aop:aspect>
+    </aop:config>
+    <bean id="userDao" class="dao.impl.UserDaoImpl"/>
+    <bean id="userBiz" class="dao.impl.UserBizImpl">
         <!--设置注入-->
         <property name="dao">
             <ref bean="userDao"/>
@@ -14,5 +27,8 @@
             <ref bean="userDao"/>
         </constructor-arg>
         -->
+    </bean>
+    <bean id="userService" class="service.impl.UserServiceImpl">
+        <property name="dao" ref="userBiz"/>
     </bean>
 </beans>
