@@ -14,8 +14,8 @@ public class Test {
     public static void main(String[] args) {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
         IUserService service = (IUserService) ctx.getBean("userService");
-//        service.saveUser(new User("luml"));
-        ServiceLogging logging = (ServiceLogging) ctx.getBean("serviceLogging");
-        logging.beforeService();
+        service.saveUser(new User("luml"));
+//        ServiceLogging logging = (ServiceLogging) ctx.getBean("serviceLogging");
+//        logging.beforeService();
     }
 }
